@@ -137,7 +137,7 @@ function select(req, res) {
                 "record" : result[0] // result에 한건만 들어있지만 배열이므로 0번 데이터를 보내준다.
             }));
         })
-       
+       //sdfdf
 
     });
 
