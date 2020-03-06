@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+//문서가 로드되면
+$(function(){
+
+    //첫번째 버튼을 클릭시 비동기 방식의 요청 시도
+    //Async : 서버가 응답할 때까지 대기 하지 않고, 로컬의 로직을 나름 수행할 수 있다.
+    //one page 새로고침 없는 웹사이트 구축에 많이 사용
+    //최초로 구글에서 검색 기능에 사용됨
+    $($("button")[0]).click(function(){
+        $.ajax({
+            url:"http://localhost:7777/hero/insert",
+            type:"post",
+            data:{
+                "name" : $("#name").val(),
+                "gender" : $("#gender").val(),
+                "age" : $("#age").val()
+            },
+            success:function(result){
+                alert("코드 : " + result.code + "서버에서 보낸 메시지 : " + result.msg);
+                
+            }
+        });
+    });
+
+    //두번째 버튼을 클리식 동기 방식의 요청시도
+    $($("button")[1]).click(function(){
+        $("form").attr("method","post");
+        $("form").attr("action","http://localhost:7777/hero/insert");
+        $("form").submit();//동기방식의 전송
+
+    });
+    });
+</script>
+</head>
+<body>
+    <form>
+        <input type="text" id="name" name="name" placeholder="이름"/>
+        <input type="text" id="gender" name="gender" placeholder="성별"/>
+        <input type="text" id="age" name="age" placeholder="나이"/>
+    </form>
+    <button>비동기 전송하기</button>
+    <button>동기 전송하기</button>
+</body>
+</html>
